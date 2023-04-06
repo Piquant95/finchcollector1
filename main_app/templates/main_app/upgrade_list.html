@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<h1>Upgrade List</h1>
+
+{% for upgrade in upgrade_list %}
+<div class="card">
+    <div class="card-content">
+        <span class="card-title">{{ upgrade.name }}</span>
+        <p>Description: {{ upgrade.description }}</p>
+    </div>
+        <a href="{% url 'upgrade_detail' upgrade.id %}"><button class="button">View Upgrade</button>
+        </a>
+    </div>
+{% endfor %}
+
+{% endblock %}
