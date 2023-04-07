@@ -4,7 +4,7 @@ from datetime import date
 
 
 
-SERVICE = (
+Championship = (
     ('S', 'Superbowl'),
     ('N', 'NBA Finals'),
     ('W', 'World Series')
@@ -38,13 +38,13 @@ class State(models.Model):
         return reverse ('detail', kwargs={'state_id' : self.id})
     
     def updates_for_today(self):
-        return self.updates_set.filter(date=date.today()).count() >= len(SERVICE)
+        return self.updates_set.filter(date=date.today()).count() >= len(CHAMPIONSHIP)
     
 
 
 class Updates(models.Model):
     date = models.DateField('Championship date')
-    service = models.CharField(max_length=1, choices=SERVICE, default=SERVICE[0][0])
+    championship = models.CharField(max_length=1, choices=CHAMPIONSHIP, default=CHAMPIONSHIP[0][0])
     car = models.ForeignKey(State, on_delete=models.CASCADE)
     def __str__(self):
         return f"{self.get_service_display()} on {self.date}"
