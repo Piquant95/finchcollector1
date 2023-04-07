@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<h1>List of Sport States</h1>
+
+{% for state in states %}
+<div class="card">
+    <div class="card-content">
+      <span class="card-title">{{ state.name }}</span>
+      <p>football: {{ state.football }}</p>
+      <p>basketball: {{ state.basketball }}</p>
+      <p>baseball: {{ state.baseball }}</p>
+    </div>
+    <a  href="{% url 'detail' state.id %}"><button class="button">See details</button></a>
+  </div>
+  {% endfor %}
+{% endblock %}

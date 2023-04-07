@@ -16,8 +16,8 @@ class Migration(migrations.Migration):
             fields=[
                 ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
                 ('date', models.DateField()),
-                ('service', models.CharField(choices=[('O', 'Oil change'), ('T', 'Tire change'), ('C', 'Check up')], default='O', max_length=1)),
-                ('car', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='main_app.car')),
+                ('championship', models.CharField(choices=[('S', 'Superbowl'), ('N', 'NBA Finals'), ('W', 'World Series')], default='O', max_length=1)),
+                ('state', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='main_app.state')),
             ],
         ),
     ]

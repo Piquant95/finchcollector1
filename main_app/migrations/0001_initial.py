@@ -12,13 +12,13 @@ class Migration(migrations.Migration):
 
     operations = [
         migrations.CreateModel(
-            name='Car',
+            name='State',
             fields=[
                 ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('make', models.CharField(max_length=100)),
-                ('model', models.CharField(max_length=100)),
-                ('year', models.IntegerField()),
-                ('description', models.TextField(max_length=250)),
+                ('state', models.CharField(max_length=100)),
+                ('football', models.CharField(max_length=100)),
+                ('basketball', models.CharField(max_length=100)),
+                ('baseball', models.CharField(max_length=100)),
             ],
         ),
     ]

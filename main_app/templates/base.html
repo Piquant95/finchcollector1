@@ -8,16 +8,16 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
     <link rel="stylesheet" href="{% static 'css/style.css' %}">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
-    <title>Car collector</title>
+    <title>Sport States</title>
 </head>
 <body>
     <nav>
         <div class="nav-wrapper">
-          <a href="/" class="brand-logo right">Car Collector</a>
+          <a href="/" class="brand-logo right">Sport States</a>
           <ul id="nav-mobile" class="left hide-on-med-and-down">
             <li><a href="{% url 'about' %}">About</a></li>
-            <li><a href="{% url 'cars_create' %}">Add a Car</a></li>
-            <li><a href="{% url 'index' %}">View Cars</a></li>
+            <li><a href="{% url 'states_create' %}">Add a State</a></li>
+            <li><a href="{% url 'index' %}">View States</a></li>
             <li><a href="{% url 'upgrade_create' %}">Add an Upgrade</a></li>
             <li><a href="{% url 'upgrade_index' %}">View all upgrades</a></li>
           </ul>
@@ -30,6 +30,6 @@
   {% endblock %}
 </main>
 <footer class="page-footer">
-  <div class="right">All Rights Reserved, &copy; 2023 Car Collector &nbsp;</div>
+  <div class="right">All Rights Reserved, &copy; 2023 Sport States &nbsp;</div>
 </footer>
 </html>

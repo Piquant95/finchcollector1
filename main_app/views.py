@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.views.generic import ListView, DetailView
-from .models import Car, Upgrade
+from .models import State, Upgrade
 from .forms import UpdatesForm
 
 # Create your views here.
@@ -16,42 +16,42 @@ def about(request):
     return render(request, 'about.html')
 
 
-def cars_index(request):
-    cars = Car.objects.all()
-    return render(request, 'cars/index.html', {
-        'cars': cars
+def states_index(request):
+    states = State.objects.all()
+    return render(request, 'states/index.html', {
+        'states': states
     })
 
-def cars_detail(request, car_id):
-    car = Car.objects.get(id=car_id)
-    id_list = car.upgrade.all().values_list('id')
-    upgrade_car_doesnt_have = Upgrade.objects.exclude(id__in=id_list)
+def states_detail(request, state_id):
+    state = State.objects.get(id=state_id)
+    id_list = state.upgrade.all().values_list('id')
+    upgrade_state_doesnt_have = Upgrade.objects.exclude(id__in=id_list)
     updates_form = UpdatesForm()
-    return render(request, 'cars/detail.html', {
-        'car': car , 'updates_form' : updates_form, 'upgrade' : upgrade_car_doesnt_have
+    return render(request, 'states/detail.html', {
+        'state': state , 'updates_form' : updates_form, 'upgrade' : upgrade_state_doesnt_have
     })
 
-class CarCreate(CreateView):
-    model = Car
-    fields = ['make', 'model', 'year', 'description']
+class StateCreate(CreateView):
+    model = State
+    fields = ['name', 'football', 'basketball', 'baseball']
 
 class CarUpdate(UpdateView):
-  model = Car
-  fields = ['model', 'year', 'description']
+  model = State
+  fields = ['football', 'basketball', 'baseball']
 
 class CarDelete(DeleteView):
-  model = Car
-  success_url = '/cars'
+  model = State
+  success_url = '/states'
 
 
-def add_updates(request, car_id):
+def add_updates(request, state_id):
    form = UpdatesForm(request.POST)
    
    if form.is_valid():
     new_updates = form.save(commit=False)
-    new_updates.car_id = car_id
+    new_updates.state_id = state_id
     new_updates.save()
-    return redirect('detail', car_id=car_id)
+    return redirect('detail', state_id=state_id)
    
 
 class UpgradeList(ListView):
@@ -74,12 +74,12 @@ class UpgradeDelete(DeleteView):
 
 
 
-def assoc_upgrade(request, car_id, upgrade_id):
+def assoc_upgrade(request, state_id, upgrade_id):
   
-  Car.objects.get(id=car_id).upgrade.add(upgrade_id)
-  return redirect('detail', car_id=car_id)
+  State.objects.get(id=state_id).upgrade.add(upgrade_id)
+  return redirect('detail', state_id=state_id)
 
 
-def delete_upgrade(request, car_id, upgrade_id):
-  Car.objects.get(id=car_id).upgrade.remove(upgrade_id)
-  return redirect('detail', car_id=upgrade_id )
+def delete_upgrade(request, state_id, upgrade_id):
+  State.objects.get(id=state_id).upgrade.remove(upgrade_id)
+  return redirect('detail', state_id=upgrade_id )
