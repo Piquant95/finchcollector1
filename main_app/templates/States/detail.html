@@ -1,24 +1,24 @@
 {% extends 'base.html' %}
 {% block content %}
 
-<h1>Car Details</h1>
+<h1>State Details</h1>
 <div class="row">
   <div class="col s6">
     <div class="card">
       <div class="card-content">
-        <span class="card-title">{{ car.make }}</span>
-        <p>model: {{ car.model }}</p>
-        <p>year: {{ car.year }}</p>
-        <p>Description: {{ car.description|linebreaks }}</p>
+        <span class="card-title">{{ state.name }}</span>
+        <p>model: {{ state.football }}</p>
+        <p>year: {{ state.basketball }}</p>
+        <p>Description: {{ state.baseball|linebreaks }}</p>
       </div>
         <div class="card-action">
-          <a href="{% url 'cars_update' car.id %}">Edit</a>
-          <a href="{% url 'cars_delete' car.id %}">Delete</a>
+          <a href="{% url 'states_update' state.id %}">Edit</a>
+          <a href="{% url 'states_delete' state.id %}">Delete</a>
         </div>
     </div>
   </div>
   <div class="col s6">
-    <form action="{% url 'add_updates' car.id %}" method="POST">
+    <form action="{% url 'add_updates' state.id %}" method="POST">
         {% csrf_token %}
         <!-- Render the inputs -->
         {{ updates_form.as_p }}
@@ -26,13 +26,13 @@
     </form>
     <table class="striped">
       <thead>
-        <tr><th>Date</th><th>Service</th></tr>
+        <tr><th>Date</th><th>Championship</th></tr>
       </thead>
       <tbody>
-        {% for updates in car.updates_set.all %}
+        {% for updates in state.updates_set.all %}
           <tr>
             <td>{{updates.date}}</td>
-            <td>{{updates.get_service_display}}</td>
+            <td>{{updates.get_championship_display}}</td>
           </tr>
         {% endfor %}
       </tbody>
@@ -43,9 +43,9 @@
 <hr>
 <div class="row">
   <div class="col s6">
-    <h3>{{ car.make }}'s Upgrade</h3>
-    {% if car.upgrade.count %}
-      {% for upgrade in car.upgrade.all %}
+    <h3>{{ state.make }}State's Upgrade</h3>
+    {% if state.upgrade.count %}
+      {% for upgrade in state.upgrade.all %}
         <div class="card">
           <div class="card-content">
             <span class="card-title">
@@ -53,7 +53,7 @@
             </span>
           </div>
           <div class="card-action">
-              <form action="{% url 'delete_upgrade' car.id upgrade.id %}" method="POST">
+              <form action="{% url 'delete_upgrade' state.id upgrade.id %}" method="POST">
                 {% csrf_token %}
                 <button type="submit" class="btn">Delete</button>
               </form>
@@ -61,7 +61,7 @@
         </div>
       {% endfor %}
     {% else %}
-      <h5>No Upgrades 😿</h5>
+      <h5>No Upgrades </h5>
     {% endif %}
   </div>
   <div class="col s6">
@@ -75,7 +75,7 @@
             </span>
           </div>
           <div class="card-action">
-            <form action="{% url 'assoc_upgrade' car.id grade.id %}" method="POST">
+            <form action="{% url 'assoc_upgrade' state.id grade.id %}" method="POST">
               {% csrf_token %}
               <button type="submit" class="btn">Add</button>
             </form>
@@ -83,7 +83,7 @@
         </div>
       {% endfor %}
     {% else %}
-      <h5>{{car.make}} Already Has All Upgrades Available</h5>
+      <h5>{{state.name}} Already Has All Upgrades Available</h5>
     {% endif %}
   </div>
 </div>
@@ -96,7 +96,7 @@
      autoClose: true
   });
 
-    const selectEl = document.getElementById('id_service');
+    const selectEl = document.getElementById('id_championship');
     M.FormSelect.init(selectEl);
 </script>
 {% endblock %}

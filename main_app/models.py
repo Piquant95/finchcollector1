@@ -4,7 +4,7 @@ from datetime import date
 
 
 
-Championship = (
+CHAMPIONSHIP = (
     ('S', 'Superbowl'),
     ('N', 'NBA Finals'),
     ('W', 'World Series')
@@ -45,9 +45,9 @@ class State(models.Model):
 class Updates(models.Model):
     date = models.DateField('Championship date')
     championship = models.CharField(max_length=1, choices=CHAMPIONSHIP, default=CHAMPIONSHIP[0][0])
-    car = models.ForeignKey(State, on_delete=models.CASCADE)
+    state = models.ForeignKey(State, on_delete=models.CASCADE)
     def __str__(self):
-        return f"{self.get_service_display()} on {self.date}"
+        return f"{self.get_championship_display()} on {self.date}"
     
 
     class Meta:

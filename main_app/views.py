@@ -35,11 +35,11 @@ class StateCreate(CreateView):
     model = State
     fields = ['name', 'football', 'basketball', 'baseball']
 
-class CarUpdate(UpdateView):
+class StateUpdate(UpdateView):
   model = State
   fields = ['football', 'basketball', 'baseball']
 
-class CarDelete(DeleteView):
+class StateDelete(DeleteView):
   model = State
   success_url = '/states'
 
